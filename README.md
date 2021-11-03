@@ -11,5 +11,12 @@ Express TypeScript backend to service cosc-4351-frontend
 
 ## Usage
 
-To start the backend server, run: `npm start`
+1. Install dependencies
+```
+npm install
+```
 
+2. Start server
+```
+npm start
+```
