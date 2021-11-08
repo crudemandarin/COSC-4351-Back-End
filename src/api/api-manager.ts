@@ -22,7 +22,7 @@ class ApiManager {
         return observable;
     }
 
-    public static fetchUsers() {
+    public static fetchUsers(): Observable<any> {
         const observable: Observable<any> = ApiService.getUsers();
         observable.subscribe({
             next: ret => {
@@ -35,7 +35,7 @@ class ApiManager {
         return observable;
     }
 
-    private static loadReservations(data: any) {
+    private static loadReservations(data: any): void {
         console.log('ApiManager.loadReservations: data=', data);
         const reservationsList: Reservation[] = [];
         for (const reservationData of data) {
@@ -72,7 +72,7 @@ class ApiManager {
         this.reservations = reservationsList;
     }
 
-    private static loadUsers(data: any) {
+    private static loadUsers(data: any): void {
         console.log('ApiManager.loadUsers: data=', data);
         const userList: User[] = [];
         for (const userData of data) {
@@ -88,9 +88,9 @@ class ApiManager {
         this.users = userList;
     }
 
-    public static getReservations() { return this.reservations; }
+    public static getReservations(): Reservation[] { return this.reservations; }
 
-    public static getUsers() { return this.users; }
+    public static getUsers(): User[] { return this.users; }
 
 }
 

@@ -1,7 +1,5 @@
 import { Router } from "express";
 
-import ApiManager from "../api/api-manager";
-
 const router = Router();
 
 /* GET /availability ?datetime=&size= */
