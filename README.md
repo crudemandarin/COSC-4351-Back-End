@@ -2,13 +2,6 @@
 
 Express TypeScript backend to service cosc-4351-frontend
 
-## Dependencies
-
-- NodeJS 8.0.0
-- TypeScript
-- TSLint
-- Express
-
 ## Usage
 
 1. Install dependencies
