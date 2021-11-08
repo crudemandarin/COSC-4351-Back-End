@@ -1,6 +1,6 @@
 /* Program Entrypoint */
 
-const PORT = 3000;
+const PORT = 5050;
 const LAMBDA = !!process.env.LAMBDA_TASK_ROOT;
 
 const app = require('./app');
@@ -11,7 +11,7 @@ if (LAMBDA) {
     module.exports.handler = (event, context) => serverlessExpress.proxy(server, event, context);
 } else {
     app.listen(PORT, () => {
-        console.log('\n-- CougarCS API is NOT running on AWS Lambda');
-        console.log(`-- CougarCS API is listening at http://localhost:${PORT}`);
+        console.log('\n-- API is NOT running on AWS Lambda');
+        console.log(`-- API is listening at http://localhost:${PORT}`);
     });
 }
