@@ -16,7 +16,11 @@ Express TypeScript backend to service cosc-4351-frontend
 npm install
 ```
 
-2. Start server
+2. Create `dist` folder in project root directory
+
+3. Copy `server.js` into `dist`
+
+4. Start server
 ```
 npm start
 ```
