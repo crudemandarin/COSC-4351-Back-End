@@ -5,14 +5,13 @@ import Utils from '../utils';
 
 const router = Router();
 
-/* GET /availability ?datetime=&size= */
+/* GET /reservation ?datetime=&size= */
 
 router.get(
     '/',
-    query('datetime')
-        .isNumeric(),
-    query('size')
-        .isFloat({ max: Utils.MAXIMUM_RESERVATION_SIZE }),
+    query('datetime').isNumeric(),
+    query('size', `"size" must be in range { min=${Utils.MINIMUM_RESERVATION_SIZE}, max=${Utils.MAXIMUM_RESERVATION_SIZE} }`)
+        .isFloat({ min: Utils.MINIMUM_RESERVATION_SIZE, max: Utils.MAXIMUM_RESERVATION_SIZE }),
     (req, res) => {
         // requires auth -> 401 Unauthorized
         // requires query params 'datetime' and 'size' -> 400 Bad Request
@@ -39,7 +38,10 @@ router.get(
         // else
             // return UNAVAILABLE
 
-        res.status(503).json( { message: 'Not implemented' } );
+        // res.status(503).json( { message: 'Not implemented' } );
+
+        // Temporary Dummy Data
+        res.status(200).json( { message: 'Available, ' } )
 });
 
 export default router;

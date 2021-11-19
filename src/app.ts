@@ -2,7 +2,7 @@ import express from 'express';
 import cors from 'cors';
 
 import indexRoute from './routes/index';
-import availabilityRoute from './routes/availability';
+import reservationRoute from './routes/reservation';
 import reservationsRoute from './routes/reservations';
 import usersRoute from './routes/users';
 
@@ -14,7 +14,7 @@ app.use(cors());
 
 // Routes
 app.use('/', indexRoute);
-app.use('/availability', availabilityRoute);
+app.use('/reservation', reservationRoute);
 app.use('/reservations', reservationsRoute);
 app.use('/users', usersRoute);
 
