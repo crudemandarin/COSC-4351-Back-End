@@ -9,15 +9,19 @@ const router = Router();
 
 router.get(
     '/',
-    query('datetime').isNumeric(),
-    query('size', `"size" must be in range { min=${Utils.MINIMUM_RESERVATION_SIZE}, max=${Utils.MAXIMUM_RESERVATION_SIZE} }`)
+    // Auth Middleware
+    query('datetime')
+        .isNumeric(),
+    query('size')
         .isFloat({ min: Utils.MINIMUM_RESERVATION_SIZE, max: Utils.MAXIMUM_RESERVATION_SIZE }),
     (req, res) => {
-        // requires auth -> 401 Unauthorized
-        // requires query params 'datetime' and 'size' -> 400 Bad Request
-
+        console.log('\nGET /reservation');
         const errors = validationResult(req);
         if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+        const { datetime, size } = req.query;
+
+        console.log(datetime, size);
 
         // init deleteStage: number[]
 
@@ -40,8 +44,32 @@ router.get(
 
         // res.status(503).json( { message: 'Not implemented' } );
 
-        // Temporary Dummy Data
-        res.status(200).json( { message: 'Reservation available, pending reservation created.', reservationId: '12345' } )
+        const reservationId = '12345';
+
+
+        // res.status(406).json({ message: 'Reservation not available' });
+
+        res.status(200).json({ message: `Pending reservation ${reservationId} created`, reservationId: '12345' });
 });
+
+/* GET /reservation/book ?reservationId= */
+
+router.get(
+    '/book',
+    // Auth Middleware
+    query('reservationId')
+        .exists(),
+    (req, res) => {
+        console.log('\nGET /reservation/book');
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+
+        const { reservationId } = req.query;
+
+        console.log(reservationId);
+
+        res.status(200).json({ message: `Reservation ${reservationId} is successfully booked` });
+    }
+);
 
 export default router;
