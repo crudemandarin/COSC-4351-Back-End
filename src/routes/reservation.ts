@@ -41,7 +41,7 @@ router.get(
         // res.status(503).json( { message: 'Not implemented' } );
 
         // Temporary Dummy Data
-        res.status(200).json( { message: 'Available, ' } )
+        res.status(200).json( { message: 'Reservation available, pending reservation created.', reservationId: '12345' } )
 });
 
 export default router;
