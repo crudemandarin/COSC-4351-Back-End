@@ -21,7 +21,7 @@ app.use('/users', usersRoute);
 // Default to 404 if Endpoint/Method Not Recognized
 app.use((req, res, next) => {
     res.status(404);
-    res.json({ error: 'Not found' });
+    res.json({ message: 'Not found' });
 });
 
 export = app;
