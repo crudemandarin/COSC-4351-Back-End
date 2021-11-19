@@ -16,7 +16,7 @@ class ApiManager {
                 this.loadReservations(ret.data);
             },
             error: err => {
-                console.log('ApiManager.getReservations: Could not fetch reservations');
+                console.log('ApiManager.getReservations: Error! Could not fetch reservations. err = ', err);
             }
         });
         return observable;
@@ -49,10 +49,12 @@ class ApiManager {
             const userData = reservationData.user;
             const user = new User();
 
+            // Registered user
             if (typeof reservationData.user === 'number') {
                 user.id = userData;
             }
 
+            // Guest user
             else if(typeof reservationData.user === 'object') {
                 user.firstName = userData.firstName;
                 user.lastName = userData.lastName;
@@ -62,7 +64,7 @@ class ApiManager {
             }
 
             else {
-                console.log('ApiManager.loadReservations: User type not recognized. User = ', reservationData.user);
+                throw 'ApiManager.loadReservations: User type not recognized. User = ' + reservationData.user;
             }
 
             reservation.user = user;

@@ -8,6 +8,7 @@ const router = Router();
 
 router.get('/', async (req, res) => {
     console.log('\nGET /users');
+    
     ApiManager.fetchUsers().subscribe({
         next: () => {
             res.status(200).json({ users: ApiManager.getUsers() });
