@@ -37,7 +37,7 @@ class ApiManager {
 
     private static loadReservations(data: any): void {
         console.log('ApiManager.loadReservations: data=', data);
-        const reservationsList: Reservation[] = [];
+        const reservationList: Reservation[] = [];
         for (const reservationData of data) {
             const reservation = new Reservation();
             reservation.id = reservationData.id;
@@ -67,9 +67,9 @@ class ApiManager {
 
             reservation.user = user;
 
-            reservationsList.push(reservation);
+            reservationList.push(reservation);
         }
-        this.reservations = reservationsList;
+        this.reservations = reservationList;
     }
 
     private static loadUsers(data: any): void {

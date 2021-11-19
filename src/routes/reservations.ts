@@ -6,7 +6,7 @@ const router = Router();
 
 /* GET /reservations */
 
-router.get('/', async (req, res) => {
+router.get('/', (req, res) => {
     ApiManager.fetchReservations().subscribe({
         next: () => {
             res.status(200).json( { reservations: ApiManager.getReservations() } );
