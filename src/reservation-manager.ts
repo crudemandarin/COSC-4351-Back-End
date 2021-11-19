@@ -4,10 +4,6 @@ import Utils from "./utils";
 
 class ReservationManager {
 
-    public static getReservations() {
-
-    }
-
     // get list of all reservations
     // find all reservations that intersect with datetime
     // check if it's possible to make reservation
@@ -33,18 +29,17 @@ class ReservationManager {
         ApiManager.fetchReservations().subscribe({
             next: () => {
                 const reservations = ApiManager.getReservations();
-                
-                let intersecting: Reservation[] = [];
+
+                const intersecting: Reservation[] = [];
                 for (const reservation of reservations) if (reservation.isIntersecting(staged)) intersecting.push(reservation);
 
-                let guestList: number[] = [];
+                const guestList: number[] = [];
                 for (const reservation of intersecting) guestList.push(reservation.guests);
-                
-                const availableTables = Utils.getAvailableTables(guestList);
 
+                const availableTables = Utils.getAvailableTables(guestList);
             },
             error: (err) => {
-
+                console.log('Failed to fetch reservations. err =', err);
             }
         });
     }

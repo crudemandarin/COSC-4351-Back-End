@@ -29,7 +29,7 @@ router.get(
 
         // res.status(406).json({ message: 'Reservation not available' });
 
-        res.status(200).json({ message: `Pending reservation ${reservationId} created`, reservationId: reservationId });
+        res.status(200).json({ message: `Pending reservation ${reservationId} created`, reservationId });
 });
 
 /* GET /reservation/book ?reservationId= */

@@ -64,7 +64,7 @@ class ApiManager {
             }
 
             else {
-                throw 'ApiManager.loadReservations: User type not recognized. User = ' + reservationData.user;
+                throw new Error('ApiManager.loadReservations: User type not recognized. User = ' + reservationData.user);
             }
 
             reservation.user = user;

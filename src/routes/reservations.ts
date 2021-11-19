@@ -8,7 +8,7 @@ const router = Router();
 
 router.get('/', (req, res) => {
     console.log('\nGET /reservations');
-    
+
     ApiManager.fetchReservations().subscribe({
         next: () => {
             res.status(200).json({ reservations: ApiManager.getReservations() });

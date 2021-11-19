@@ -18,8 +18,8 @@ class Utils {
 
     public static getAvailableTables(guestList: number[]) {
         let output = Utils.RESTAURANT_TABLES;
-        
-        let staged: number[] = [];
+
+        const staged: number[] = [];
 
         // Filter perfect fits
         output = output.filter((num, index) => {
