@@ -16,6 +16,15 @@ class Utils {
 
     /* Functions */
 
+    // given an array of table capacities and an array of reservation guest sizes
+    // determine tables left over
+        // t=[1, 2, 2, 2, 4, 4, 4, 5, 6, 6, 8]
+        // r=[3, 2, 4, 4, 2, 5, 6]
+
+        // t=[4, 6, 8]
+        // r=[]
+    // remove all perfect fits
+    // then remove combinatory fits
     public static getAvailableTables(guestList: number[]) {
         let output = Utils.RESTAURANT_TABLES;
 

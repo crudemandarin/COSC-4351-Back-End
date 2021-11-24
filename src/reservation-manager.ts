@@ -7,15 +7,7 @@ class ReservationManager {
     // get list of all reservations
     // find all reservations that intersect with datetime
     // check if it's possible to make reservation
-        // given an array of table capacities and an array of reservation guest sizes
-        // determine tables left over
-            // t=[1, 2, 2, 2, 4, 4, 4, 5, 6, 6, 8]
-            // r=[3, 2, 4, 4, 2, 5, 6]
-
-            // t=[4, 6, 8]
-            // r=[]
-        // remove all perfect fits
-        // then remove combinatory fits
+        
     // if possible -> create reservation, return id
     // else -> throw error
 
@@ -37,6 +29,8 @@ class ReservationManager {
                 for (const reservation of intersecting) guestList.push(reservation.guests);
 
                 const availableTables = Utils.getAvailableTables(guestList);
+
+                // Incomplete
             },
             error: (err) => {
                 console.log('Failed to fetch reservations. err =', err);
