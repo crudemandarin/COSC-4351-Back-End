@@ -6,7 +6,7 @@
             "createTime": 1636318519916, 
             "startTime": 1936318519916,
             "status": 0,
-            "user": 11
+            "user": "nykolas"
         },
         {
             "id": 2,
@@ -51,7 +51,7 @@
 
     "users": [
         {
-            "id": 11,
+            "id": "nykolas",
             "firstName": "Bobby",
             "lastName": "Martinez",
             "phoneNumber": "5555555555",
@@ -59,7 +59,7 @@
             "memberPoints": 46
         },
         {
-            "id": 22,
+            "id": "boobio",
             "firstName": "Timmy",
             "lastName": "Bimmy",
             "phoneNumber": "5555555555",

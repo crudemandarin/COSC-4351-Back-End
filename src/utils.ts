@@ -8,44 +8,81 @@ class Utils {
 
     // Configuration
     public static MINIMUM_RESERVATION_SIZE = 1;
-    public static MAXIMUM_RESERVATION_SIZE = 6;
+    public static MAXIMUM_RESERVATION_SIZE = 12;
 
-    public static RESERVATION_LENGTH = 2*60*60*1000; // 2 hrs in milliseconds
+    public static RESERVATION_LENGTH = 2*60*60*1000; // 2 hrs in ms
 
     private static RESTAURANT_TABLES = [2,2,3,3,4,4,5,7,2,5,5,3,6];
 
     /* Functions */
 
-    // given an array of table capacities and an array of reservation guest sizes
-    // determine tables left over
-        // t=[1, 2, 2, 2, 4, 4, 4, 5, 6, 6, 8]
-        // r=[3, 2, 4, 4, 2, 5, 6]
+    private static descending(a: number, b: number) {
+        return b - a;
+    }
 
-        // t=[4, 6, 8]
-        // r=[]
-    // remove all perfect fits
-    // then remove combinatory fits
-    public static getAvailableTables(guestList: number[]) {
-        let output = Utils.RESTAURANT_TABLES;
+    // NEEDS WORK -- INVALID
+    public static isTableAvailable(guestList: number[], tableList: number[] = Utils.RESTAURANT_TABLES) {
 
-        const staged: number[] = [];
+        // Guest list has more elements than table list
+        if (guestList.length > tableList.length) return false;
 
-        // Filter perfect fits
-        output = output.filter((num, index) => {
-            const flag = guestList.includes(num)
-            if (flag) staged.push(index);
-            return !flag;
-        });
+        console.log('Round 0: Input'
+                    + `\n--> tableList = [${tableList}]`
+                    + `\n--> guestList = [${guestList}]`);
 
-        // Remove spent guests
-        for (let x = staged.length - 1; x >= 0; x--) guestList.splice(staged[x], 1);
+        // Remove Perfect Fits
+        for (let x = tableList.length - 1; x >= 0; x--) {
+            const table = tableList[x];
+            for (let y = guestList.length - 1; y >= 0; y--) {
+                const guest = guestList[y];
+                if (table === guest) {
+                    guestList.splice(y, 1);
+                    tableList.splice(x, 1);
+                    break;
+                }
+            }
+        }
 
-        console.log(`Round 1\noutput=${output}\nguestList=${guestList}`);
+        console.log('Round 1: Removed Perfect Fits'
+                    + `\n--> tableList = [${tableList}]`
+                    + `\n--> guestList = [${guestList}]`);
 
-        // Filter combinations
-        // TODO
+        // Remove Less Than Fits
+        for (let x = tableList.length - 1; x >= 0; x--) {
+            const table = tableList[x];
+            for (let y = guestList.length - 1; y >= 0; y--) {
+                const guest = guestList[y];
+                if (guest < table) {
+                    guestList.splice(y, 1);
+                    tableList.splice(x, 1);
+                    break;
+                }
+            }
+        }
 
-        return output;
+        console.log('Round 2: Removed Less Than Fits'
+                    + `\n--> tableList = [${tableList}]`
+                    + `\n--> guestList = [${guestList}]`);
+
+        // Remove Combinatory Fits
+        for (let x = guestList.length - 1; x >= 0; x--) {
+            const guest = guestList[x];
+            const t1 = tableList[tableList.length - 1];
+            for (let y = tableList.length - 2; y >= 0; y--) {
+                const t2 = tableList[y];
+                if (guest <= t1 + t2) {
+                    guestList.splice(y, 1);
+                    tableList.splice(x, 1);
+                    break;
+                }
+            }
+        }
+
+        console.log('Round 3: Removed Combinatory Fits'
+                    + `\n--> tableList = [${tableList}]`
+                    + `\n--> guestList = [${guestList}]`);
+
+        return guestList.length === 0;
     }
 }
 

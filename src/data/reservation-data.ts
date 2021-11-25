@@ -13,9 +13,9 @@ class Reservation {
     constructor() {}
 
     isIntersecting(other: Reservation): boolean {
-        const lA = this.startTime; const rA = this.startTime + Utils.RESERVATION_LENGTH;
-        const rB = other.startTime; const lB = other.startTime + Utils.RESERVATION_LENGTH;
-        return (lA < rB) && (rA > lB);
+        const aLeft = this.startTime; const aRight = this.startTime + Utils.RESERVATION_LENGTH;
+        const bLeft = other.startTime; const bRight = other.startTime + Utils.RESERVATION_LENGTH;
+        return (aLeft < bRight) && (aRight > bLeft);
     }
 }
 

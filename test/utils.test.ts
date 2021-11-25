@@ -1,0 +1,37 @@
+import Utils from "../src/utils";
+
+test('Basic Test', () => {
+    const guestList = [1,1];
+    const tableList = [1,2,3];
+    expect(Utils.isTableAvailable(guestList, tableList)).toBe(true);
+});
+
+// test('Identical Arrays', () => {
+//     const guestList = [1,2,3];
+//     const tableList = [1,2,3];
+//     expect(Utils.isTableAvailable(guestList, tableList)).toBe(true);
+// });
+
+// test('Advanced Test', () => {
+//     const guestList = [3, 5, 2, 3, 5, 6, 4, 4, 1];
+//     const tableList = [1, 2, 2, 2, 4, 4, 4, 5, 6, 6, 8];
+//     expect(Utils.isTableAvailable(guestList, tableList)).toBe(true);
+// });
+
+// test('Guest List larger than Table List', () => {
+//     const guestList = [1,1,1,1];
+//     const tableList = [1,2,3];
+//     expect(Utils.isTableAvailable(guestList, tableList)).toBe(false);
+// });
+
+test('Basic Combinatory', () => {
+    const guestList = [1,5];
+    const tableList = [1,2,3];
+    expect(Utils.isTableAvailable(guestList, tableList)).toBe(true);
+});
+
+// test('Advanced Combinatory', () => {
+//     const guestList = [2, 2, 3, 4, 4, 5, 6];
+//     const tableList = [1, 2, 2, 2, 4, 4, 4, 5, 6, 6, 8];
+//     expect(Utils.isTableAvailable(guestList, tableList)).toBe(true);
+// });

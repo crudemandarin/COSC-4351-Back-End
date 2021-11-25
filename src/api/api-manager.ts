@@ -7,7 +7,6 @@ import User from "../data/user-data";
 class ApiManager {
 
     private static reservations: Reservation[];
-    private static users: User[];
 
     public static fetchReservations(): Observable<any> {
         const observable: Observable<any> = ApiService.getReservations();
@@ -17,19 +16,6 @@ class ApiManager {
             },
             error: err => {
                 console.log('ApiManager.getReservations: Error! Could not fetch reservations. err = ', err);
-            }
-        });
-        return observable;
-    }
-
-    public static fetchUsers(): Observable<any> {
-        const observable: Observable<any> = ApiService.getUsers();
-        observable.subscribe({
-            next: ret => {
-                this.loadUsers(ret.data);
-            },
-            error: err => {
-                console.log('ApiManager.getUsers: Could not fetch users');
             }
         });
         return observable;
@@ -74,25 +60,7 @@ class ApiManager {
         this.reservations = reservationList;
     }
 
-    private static loadUsers(data: any): void {
-        console.log('ApiManager.loadUsers: data=', data);
-        const userList: User[] = [];
-        for (const userData of data) {
-            const user = new User();
-            user.id = userData.id;
-            user.firstName = userData.firstName;
-            user.lastName = userData.lastName;
-            user.phoneNumber = userData.phoneNumber;
-            user.email = userData.email;
-            user.memberPoints = userData.memberPoints;
-            userList.push(user);
-        }
-        this.users = userList;
-    }
-
     public static getReservations(): Reservation[] { return this.reservations; }
-
-    public static getUsers(): User[] { return this.users; }
 
 }
 

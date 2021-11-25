@@ -4,7 +4,6 @@ import cors from 'cors';
 import indexRoute from './routes/index';
 import reservationRoute from './routes/reservation';
 import reservationsRoute from './routes/reservations';
-import usersRoute from './routes/users';
 
 const app = express();
 
@@ -16,7 +15,6 @@ app.use(cors());
 app.use('/', indexRoute);
 app.use('/reservation', reservationRoute);
 app.use('/reservations', reservationsRoute);
-app.use('/users', usersRoute);
 
 // Default to 404 if Endpoint/Method Not Recognized
 app.use((req, res, next) => res.status(404).json({ message: 'Not found' }));
