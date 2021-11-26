@@ -15,11 +15,13 @@
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.12",
+    "@types/uuid": "^8.3.3",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
-    "rxjs": "^7.4.0"
+    "rxjs": "^7.4.0",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",

@@ -16,21 +16,19 @@ router.get(
         console.log('\nGET /reservations');
 
         const errors = validationResult(req);
-        if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+        if (!errors.isEmpty()) return res.status(400).json({ message: 'Must include userId in query params', errors: errors.array() });
 
         const { userId } = req.query;
 
         ReservationManager.getReservationsByUserID(userId).subscribe({
-            next: () => {
+            next: reservations => {
                 res.status(200).json({
                     message: `Reservations for User ID "${userId}"`,
-                    reservations: ReservationManager.getReservations()
+                    reservations
                 });
             },
             error: err => {
-                res.status(500).json({
-                    message: err
-                });
+                res.status(500).json({ message: 'Could not fetch reservations' });
             }
         });
 });
@@ -42,14 +40,11 @@ router.get(
     (req, res) => {
         console.log('\nGET /reservations/all');
 
-        ApiManager.fetchReservations().subscribe({
-            next: () => {
-                res.status(200).json({
-                    message: `All exisiting reservations`,
-                    reservations: ApiManager.getReservations()
-                });
+        ApiManager.getReservations().subscribe({
+            next: reservations => {
+                res.status(200).json({ reservations });
             },
-            error: () => {
+            error: err => {
                 res.status(500).json({ message: 'Could not fetch reservations' });
             }
         });

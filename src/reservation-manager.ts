@@ -1,30 +1,41 @@
-import { Observable } from "rxjs";
+import { Observable, map } from "rxjs";
 import ApiManager from "./api/api-manager";
 import Reservation from "./data/reservation-data";
 import Utils from "./utils";
 
 class ReservationManager {
 
-    private static reservations: Reservation[] = [];
+    public static bookReservation(reservationId: string, user: any): Observable<any> {
+        const observable = ApiManager.getReservation(reservationId);
+        observable.subscribe({
+            next: reservation => {
 
-    // get list of all reservations
-    // find all reservations that intersect with datetime
-    // check if it's possible to make reservation
+                // Validate reservation
 
-    // if possible -> create reservation, return id
-    // else -> throw error
+                reservation.status = Utils.CONFIRMED;
+                reservation.user = ApiManager.getUserFromData(user);
 
-    public static createReservation(datetime: number, guests: number) {
-        const staged = new Reservation();
-        staged.createTime = Date.now();
-        staged.startTime = datetime;
-        staged.guests = guests;
-        staged.status = Utils.PENDING;
+                console.log('Expected Reservation: ', reservation);
 
-        ApiManager.fetchReservations().subscribe({
-            next: () => {
-                const reservations = ApiManager.getReservations();
+                ApiManager.updateReservation(reservation).subscribe({
+                    next: () => {
+                        console.log('Reservation updated!');
+                    },
+                    error: err => {
+                        console.log('Reservation update failed', err);
+                    }
+                });
+            },
+            error: err => {
+                console.log('Get Reservation failed', err);
+            }
+        });
+        return observable;
+    }
 
+    public static isReservationAvailable(staged: Reservation): Observable<boolean> {
+        const observable = ApiManager.getReservations().pipe(
+            map((reservations) => {
                 // Build list of intersecting reservations
                 const intersecting: Reservation[] = [];
                 for (const reservation of reservations) if (reservation.isIntersecting(staged)) intersecting.push(reservation);
@@ -33,31 +44,25 @@ class ReservationManager {
                 const guestList: number[] = [ staged.guests ];
                 for (const reservation of intersecting) guestList.push(reservation.guests);
 
-                const isAvailable = Utils.isTableAvailable(guestList);
-            },
-            error: (err) => {
-                console.log('Failed to fetch reservations. err =', err);
-                throw new Error('Failed to fetch reservations. err = ' + err);
-            }
-        });
-    }
-
-    public static getReservationsByUserID(userId: string): Observable<Reservation[]> {
-        const observable = ApiManager.fetchReservations();
-        observable.subscribe({
-            next: () => {
-                ReservationManager.reservations = ApiManager.getReservations()
-                                                            .filter(reservation => reservation.user.id === userId);
-            },
-            error: (err) => {
-                console.log('Failed to fetch reservations. err =', err);
-                throw err;
-            }
-        });
+                return Utils.isTableAvailable(guestList);
+            })
+        );
         return observable;
     }
 
-    public static getReservations() { return ReservationManager.reservations; }
+    public static createReservation(reservation: Reservation): Observable<any> {
+        const observable = ApiManager.createReservation(reservation);
+        return observable;
+    }
+
+    public static getReservationsByUserID(userId: string): Observable<Reservation[]> {
+        const observable = ApiManager.getReservations().pipe(
+            map(reservations => {
+                return reservations.filter(reservation => reservation.user.id === userId);
+            })
+        );
+        return observable;
+    }
 
 }
 

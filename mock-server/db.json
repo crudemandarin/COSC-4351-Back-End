@@ -1,78 +1,49 @@
 {
-    "reservations": [
-        {
-            "id": 1,
-            "guests": 3,
-            "createTime": 1636318519916, 
-            "startTime": 1936318519916,
-            "status": 0,
-            "user": "nykolas"
-        },
-        {
-            "id": 2,
-            "guests": 3,
-            "createTime": 1340318519916,
-            "startTime": 1636318519916,
-            "status": 0,
-            "user": {
-                "firstName": "Nykolas",
-                "lastName": "Farhangi",
-                "phoneNumber": "5555555555",
-                "email": "nykolasfarhangi@gmail.com"
-            }
-        },
-        {
-            "id": 3,
-            "guests": 2,
-            "createTime": 1636318519916,
-            "startTime": 2036318519916,
-            "status": 0,
-            "user": {
-                "firstName": "Elisa",
-                "lastName": "Martinez",
-                "phoneNumber": "5555555555",
-                "email": "elizamartinez@gmail.com"
-            }
-        },
-        {
-            "id": 4,
-            "guests": 4,
-            "createTime": 1636318519916,
-            "startTime": 2336318519916,
-            "status": 0,
-            "user": {
-                "firstName": "Muhammad",
-                "lastName": "Usman",
-                "phoneNumber": "5555555555",
-                "email": "muhammadusman@gmail.com"
-            }
-        }
-    ],
-
-    "users": [
-        {
-            "id": "nykolas",
-            "firstName": "Bobby",
-            "lastName": "Martinez",
-            "phoneNumber": "5555555555",
-            "email": "bobbymartinez@gmail.com",
-            "memberPoints": 46
-        },
-        {
-            "id": "boobio",
-            "firstName": "Timmy",
-            "lastName": "Bimmy",
-            "phoneNumber": "5555555555",
-            "email": "tb.immy@gmail.com",
-            "memberPoints": 88
-        },
-        {
-            "id": 33,
-            "firstName": "kathy",
-            "lastName": "alvarez",
-            "phoneNumber": "5555555555",
-            "email": "kathya@gmail.com",
-            "memberPoints": 120
-        }
-    ]
+  "reservations": [
+    {
+      "id": "3067af04-8cf4-445f-b2d8-be5bdfcc96f4",
+      "guests": 1,
+      "createTime": 1637951058996,
+      "startTime": 123,
+      "status": 1,
+      "user": {
+        "id": "elisa",
+        "firstName": "",
+        "lastName": "",
+        "phoneNumber": "",
+        "email": "",
+        "memberPoints": -1
+      }
+    },
+    {
+      "id": "1a6fce30-94a0-483e-b3eb-46f26001777d",
+      "guests": 5,
+      "createTime": 1637951067061,
+      "startTime": 123,
+      "status": 1,
+      "user": {
+        "id": "elisa",
+        "firstName": "",
+        "lastName": "",
+        "phoneNumber": "",
+        "email": "",
+        "memberPoints": -1
+      }
+    },
+    {
+      "id": "bff33c0e-2383-4977-9c0d-b65adcfbdbfd",
+      "guests": 10,
+      "createTime": 1637951069066,
+      "startTime": 123,
+      "status": 1,
+      "user": {
+        "id": "elisa",
+        "firstName": "",
+        "lastName": "",
+        "phoneNumber": "",
+        "email": "",
+        "memberPoints": -1
+      }
+    }
+  ]
 }
