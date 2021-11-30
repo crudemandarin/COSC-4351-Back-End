@@ -23,7 +23,7 @@ npm install -g json-server
 json-server -p 4000 --watch mock-server/db.json
 ```
 
-6. Start server
+6. On seperate terminal, start server
 ```
 npm start
 ```

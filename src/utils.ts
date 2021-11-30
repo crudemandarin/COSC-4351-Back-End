@@ -14,78 +14,20 @@ class Utils {
 
     public static RESERVATION_LENGTH = 2*60*60*1000; // 2 hrs in ms
 
-    public static EXPIRATION_LENGTH = 10*60*1000; // 10 mins in ms
+    public static EXPIRATION_LENGTH = 11*60*1000; // 10 mins in ms
 
     private static RESTAURANT_TABLES = [2,2,3,3,4,4,5,7,2,5,5,3,6];
 
     /* Functions */
 
-    // NEEDS WORK -- INVALID
     public static isTableAvailable(guestList: number[], tableList: number[] = Utils.RESTAURANT_TABLES) {
-
-        // Guest list has more elements than table list
         if (guestList.length > tableList.length) return false;
-
-        // console.log('Round 0: Input'
-        //             + `\n--> tableList = [${tableList}]`
-        //             + `\n--> guestList = [${guestList}]`);
-
-        // Remove Perfect Fits
-        for (let x = tableList.length - 1; x >= 0; x--) {
-            const table = tableList[x];
-            for (let y = guestList.length - 1; y >= 0; y--) {
-                const guest = guestList[y];
-                if (table === guest) {
-                    guestList.splice(y, 1);
-                    tableList.splice(x, 1);
-                    break;
-                }
-            }
-        }
-
-        // console.log('Round 1: Removed Perfect Fits'
-        //             + `\n--> tableList = [${tableList}]`
-        //             + `\n--> guestList = [${guestList}]`);
-
-        // Remove Less Than Fits
-        for (let x = tableList.length - 1; x >= 0; x--) {
-            const table = tableList[x];
-            for (let y = guestList.length - 1; y >= 0; y--) {
-                const guest = guestList[y];
-                if (guest < table) {
-                    guestList.splice(y, 1);
-                    tableList.splice(x, 1);
-                    break;
-                }
-            }
-        }
-
-        // console.log('Round 2: Removed Less Than Fits'
-        //             + `\n--> tableList = [${tableList}]`
-        //             + `\n--> guestList = [${guestList}]`);
-
-        // Remove Combinatory Fits
-        for (let x = guestList.length - 1; x >= 0; x--) {
-            const guest = guestList[x];
-            const t1 = tableList[tableList.length - 1];
-            for (let y = tableList.length - 2; y >= 0; y--) {
-                const t2 = tableList[y];
-                if (guest <= t1 + t2) {
-                    guestList.splice(y, 1);
-                    tableList.splice(x, 1);
-                    break;
-                }
-            }
-        }
-
-        // console.log('Round 3: Removed Combinatory Fits'
-        //             + `\n--> tableList = [${tableList}]`
-        //             + `\n--> guestList = [${guestList}]`);
-
-        return true;
+        const numGuests = guestList.reduce((a, b) => a + b, 0);
+        const numSeats = tableList.reduce((a, b) => a + b, 0);
+        return numGuests < numSeats;
     }
 
-    static generateId(): string { return v4(); }
+    public static generateId(): string { return v4(); }
 }
 
 export default Utils;
