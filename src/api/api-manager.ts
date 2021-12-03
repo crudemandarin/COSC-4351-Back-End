@@ -3,6 +3,7 @@ import { ApiService } from "./api-service";
 
 import Reservation from "../data/reservation-data";
 import User from "../data/user-data";
+import { CreditCard, ExpirationDate } from "../data/creditcard-data";
 
 class ApiManager {
 	public static getReservation(
@@ -13,7 +14,6 @@ class ApiManager {
 		).pipe(
 			map((ret) => {
 				const reservationData = ret.data;
-				// console.log(reservationData);
 
 				// Reservation does not exist
 				if (Object.keys(reservationData).length === 0) return undefined;
@@ -65,6 +65,7 @@ class ApiManager {
 			startTime: reservation.startTime,
 			status: reservation.status,
 			user: reservation.user,
+			creditCard: reservation.creditCard,
 		};
 		const observable = ApiService.putReservation(data).pipe(
 			map(() => reservation)
@@ -89,10 +90,13 @@ class ApiManager {
 		reservation.startTime = reservationData.startTime;
 		reservation.status = reservationData.status;
 		reservation.user = ApiManager.getUserFromData(reservationData.user);
+		reservation.creditCard = ApiManager.getCreditCardFromData(
+			reservationData.creditCard
+		);
 		return reservation;
 	}
 
-	public static getUserFromData(userData: any) {
+	public static getUserFromData(userData: any): User {
 		const user = new User();
 
 		// Registered user
@@ -108,18 +112,24 @@ class ApiManager {
 			user.phoneNumber = userData.phoneNumber;
 			user.email = userData.email;
 			user.memberPoints = userData.memberPoints;
-		} else if (userData === undefined) {
-			console.log(
-				"ApiManager.getFormattedReservations: User is undefined"
-			);
-		} else {
-			console.log(
-				"ApiManager.getFormattedReservations: User type not recognized. User = " +
-					userData
-			);
 		}
 
 		return user;
+	}
+
+	public static getCreditCardFromData(creditCardData: any): CreditCard {
+		const creditCard = new CreditCard();
+
+		if (typeof creditCardData === "object") {
+			creditCard.number = creditCardData.number;
+			creditCard.name = creditCardData.name;
+			const expirationDate: ExpirationDate =
+				creditCardData.expirationDate;
+			creditCard.expirationDate = expirationDate;
+			creditCard.cvc = creditCardData.cvc;
+		}
+
+		return creditCard;
 	}
 }
 

@@ -43,6 +43,15 @@
         "phoneNumber": "",
         "email": "",
         "memberPoints": -1
+      },
+      "creditCard": {
+        "number": "",
+        "name": "",
+        "expirationDate": {
+          "month": "",
+          "year": ""
+        },
+        "cvc": ""
       }
     },
     {
@@ -156,18 +165,52 @@
       }
     },
     {
-      "id": "74e13fc8-552b-4184-b307-3c9e0027896b",
+      "id": "7e70f27b-cc3f-4863-8d60-94dca1bd28ba",
       "guests": 12,
-      "createTime": 1638507600062,
+      "createTime": 1638556956416,
       "startTime": 1625439600000,
-      "status": 0
+      "status": 1,
+      "user": {
+        "id": "nykolas",
+        "firstName": "",
+        "lastName": "",
+        "phoneNumber": "",
+        "email": "",
+        "memberPoints": -1
+      },
+      "creditCard": {
+        "number": "My Credit Card Number",
+        "name": "Nykolas Farhangi",
+        "expirationDate": {
+          "month": "1",
+          "year": "26"
+        },
+        "cvc": "343"
+      }
     },
     {
-      "id": "8c2ecdb7-acfe-45c1-b40a-82fc6eb4b5c2",
-      "guests": 12,
-      "createTime": 1638507685694,
+      "id": "a972d486-7074-4840-8b5a-7de059b4c777",
+      "guests": 1,
+      "createTime": 1638557699791,
       "startTime": 1625439600000,
-      "status": 0
+      "status": 1,
+      "user": {
+        "id": "nykolas",
+        "firstName": "",
+        "lastName": "",
+        "phoneNumber": "",
+        "email": "",
+        "memberPoints": -1
+      },
+      "creditCard": {
+        "number": "My Credit Card Number",
+        "name": "Nykolas Farhangi",
+        "cvc": "343",
+        "expirationDate": {
+          "month": "1",
+          "year": "26"
+        }
+      }
     }
   ]
 }

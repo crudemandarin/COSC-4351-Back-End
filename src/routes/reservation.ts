@@ -107,8 +107,9 @@ router.post(
 	// Auth Middleware
 	body("reservationId").exists(),
 	body("user").exists(),
+	body("creditCard").optional(),
 	(req, res) => {
-		console.log("\nGET /reservation/book");
+		console.log("\nPOST /reservation/book");
 
 		const errors = validationResult(req);
 		if (!errors.isEmpty())
@@ -117,7 +118,7 @@ router.post(
 				errors: errors.array(),
 			});
 
-		const { reservationId, user } = req.body;
+		const { reservationId, user, creditCard } = req.body;
 
 		ApiManager.getReservation(reservationId).subscribe({
 			next: (reservation) => {
@@ -135,8 +136,8 @@ router.post(
 
 				reservation.status = Utils.CONFIRMED;
 				reservation.user = ApiManager.getUserFromData(user);
-
-				console.log("Expected Reservation: ", reservation);
+				reservation.creditCard =
+					ApiManager.getCreditCardFromData(creditCard);
 
 				ApiManager.updateReservation(reservation).subscribe({
 					next: () => {

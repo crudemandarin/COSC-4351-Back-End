@@ -1,5 +1,6 @@
 import Holidays from "date-holidays";
 import Utils from "../utils";
+import { CreditCard } from "./creditcard-data";
 import User from "./user-data";
 
 class Reservation {
@@ -8,7 +9,8 @@ class Reservation {
 	public guests: number = -1;
 	public startTime: number = -1;
 	public status: number = -1;
-	public user: User = undefined;
+	public user?: User;
+	public creditCard?: CreditCard;
 
 	/* tslint:disable:no-empty */
 	constructor() {}

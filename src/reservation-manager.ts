@@ -20,6 +20,8 @@ class ReservationManager {
 				for (const reservation of intersecting)
 					guestList.push(reservation.guests);
 
+				console.log("Intersecting Guest List:", guestList);
+
 				return Utils.isTableAvailable(guestList);
 			})
 		);
