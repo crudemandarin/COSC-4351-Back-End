@@ -5,6 +5,7 @@ Express TypeScript backend to service cosc-4351-frontend
 ## Usage
 
 1. Install dependencies
+
 ```
 npm install
 ```
@@ -14,16 +15,19 @@ npm install
 3. Copy `server.js` into `dist`
 
 4. Install JSON Server (temporary)
+
 ```
 npm install -g json-server
 ```
 
 5. Start JSON Server
+
 ```
 json-server -p 4000 --watch mock-server/db.json
 ```
 
 6. On seperate terminal, start server
+
 ```
 npm start
 ```
